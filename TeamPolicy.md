@@ -1,10 +1,4 @@
-**GROUP REPOS** → Create an organization for our group.
-
-**INDIVIDUAL REPOS** → Each student will create an individual repository under their profile
-
-**ISSUES REPOS→** Create an issues repository inside group organization.
-
-**Team Policies** :
+# **Team Policies**
 
 1. Team members should abide by [CSBSJU behavioral policies](https://www.csbsju.edu/csb-student-development/student-life-policies) and conduct themselves in a professional manner. Team members should work to support each other and provide constructive feedback.
 2. All work will be tracked in the Acucentri Organization issues-only repository &#39; **issues-repo&#39;**.
