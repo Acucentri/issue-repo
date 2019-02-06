@@ -4,8 +4,17 @@ Team - Acucentri
 Shuffle Cards:
 
 Real-Time Game:
+>Varialbes
+    vector<Card> cards[52];
+    stack<Card> *stock; // Filled with pointers to cards in cards vector
+    stack<Card> *talon; // ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    vecotr<Card> *tableau[2][7]; _0_1_2_3_4_5_6_
+      Each element     0 |_|_|_|_|_|_|_|
+      is a pnters      1 |_|_|_|_|_|_|_|
+    
+>Algorithm
  1. Place (1..7) Card(s) on spot (1..7) of the Tableau from the Stock
- 2. Remove card from the Stock and add to Talon (or discard) stack
+ 2. Remove card from the Stock and add to Talon stack
  3. While (count<=3 or there are still moves
  4.    While there are still moves in Tableau
  5.       For(Cards Focus: Tableau)
