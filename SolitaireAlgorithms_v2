@@ -1,0 +1,69 @@
+Solitaire Game Algoritms v2
+Team   - Acucentri
+Author - Colin Tate
+
+Shuffle Cards: private vector<Cards> getShuffledDeck() { .. }
+>Variables
+    vector<Card> cardDeck[52] = {Initialize all cards in order};
+>Algorithm by Fisher-Yates
+ 1. Set the seed for the random number generator
+ 2. for(int n=cardDeck.size-1 when n is greater than 0 where --n)
+ 3.    int targetIndex = rand(n + 1);
+ 4.    Card temp = cardDeck[n];
+ 5.    cardDeck[n] = cardDeck[k];
+ 6.    cardDeck[k] = temp;
+ 7. return cardDeck
+ 
+Real-Time Game: int main()
+>Diagrams
+   >Card Deck Setup:    10                  20                  30                  40                  50    size=52
+    |0 1 2 3 4 5 6|7|8 9|0 1 2|3 4 5 6|7 8 9 0 1|2 3 4 5 6 7|8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1|
+    |_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|_|
+     |___________| | |_| |___| |_____| |_______| |_________| |_____________________________________________|
+      0,0-->0,6  1,1 1,2  1,3    1,4      1,5        1,6                        Stock
+      Section:     1  2    3      4        5          6                           7
+   >Tableau Setup:0 1 2 3 4 5 6
+               0 |1|1|1|1|1|1|1|  // Face up cards, initially each faceup stack has but one card no matter the location
+               1 |0|1|2|3|4|5|6|  // Face down cards, initially each face down stack has 0 to 6 cards depenmding on the location
+   >Talon Setup:|_|_|_|_|_|_  ... // Stack of card pointers dealt one at a time from the deck as needed
+>Varialbes
+    int section = 0;
+    vector<Card> cardDeck[52] = getShuffledDeck();
+    stack<Card> *stock;                 // Filled with pointers to cards in the deck
+    stack<Card> *talon;                 // ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^ ^
+    vector<stack<Card>> *tableau[2][7]; // Each element in the tableau vector consist of a pointer to a stack of cards
+>Algorithm - Builder
+ 1. for(int i=0; i<cardDeck.size; i++)
+ 2.    if i = 7|8|10|13|17|22|28 then,
+ 3.       section++;
+ 4.    if section>6 then,
+ 5.       stock.push(&cardDeck[i]);
+ 6.    else if section>0 then,
+ 7.       tableau[1][section].push(&cardDeck[i]);
+ 8.    else then,
+ 9.       tableau[0][i].push(&cardDeck[i]);
+>Algorithm - Solver
+ 1. Remove card from the Stock and add to Talon stack
+ 2. While (count<=3 or there are still moves
+ 3.    While there are still moves in Tableau
+ 4.       For(Cards Focus: Tableau)
+ 5.          For(Cards Target: Tableau)
+ 6.             if Focus.top.high.value equals (Taget.top.low.value)-1 and Focus.top.high.color!=Taget.top.low.color then,
+ 7.                Move Focus.top to Target.top
+ 8.                if Focus.bottom!=null then, Move Focus.bottom.high to Focus.top
+ 9.             else there are no moves
+10.    If Stock.size equals 0 and count<=3 then,
+11.       count++
+12.       Move Talon.end->start to Stock.start->end
+13.    If Talon is empty and Stock is not then, move Stock.top to Talon.top 
+14.       If Talon.top.value equals 0 (Ace) then, move Talon.top to Foundation
+15.       For(Cards Target: Tableau)  
+16.          If (Talon.top.value equals (Taget.top.low.value)-1 and Talon.top.low.color!=Target.color) or (target.top=NULL and Talon.top.value equals 12) then,
+17.             Move Talon.top to Target.top and break
+18.          else there are no moves
+29. If there are no moves and Talon isnt empty and count>3 then, game over you lost
+20. For(Cards Focus: Tableau)
+21.    For(Cards Target: Foundation)
+22.    If (Focus.top.low.value)-1 equals Target.high then,
+23.       Move Focus.top.low to target.highand break
+24. If Foundation[0..3].top.value equals 12 then, you have won
