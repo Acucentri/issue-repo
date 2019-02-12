@@ -31,11 +31,11 @@ Real-Time Game:
 >Algorithm - Solver
  1. Select top card of tableau face up section 1..7
  2. Compare with targetted bottom card of tableau face up section in each section other than target
-  .i   If the selected card can fit under target
+  .i   If the selected card is a King and the target is empty then move selected card to target location
+  .ii  Else if the selected card can fit under target
     .i   Move top of selected to bottom of target
     .ii  Set next card in selected tableau section to that sections face up
-  .ii  If the selected card is a King and the target is empty then move selected card to target location
-  .iii If the selected card has no moves on the tableau check aces section 1..7
+  .iii Else the selected card has no moves on the tableau check aces section 1..7
     .i   If selected card is the same suit and comes after the card in the targetted aces section
       .i   More selectedf card to target location
  3. Draw card from stock and put into talon then check if it can go anywhere just like step 1 to 3
