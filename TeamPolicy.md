@@ -18,3 +18,4 @@
 8. Team development will be tracked using a kanban board, where tasks will be divided amongst members of the group and will be categorized as &#39;To Do&#39;, &#39;In Progress&#39;, &#39;Testing&#39; or &#39;Completed&#39;.
 9. To maintain order and organization, team members should perform periodic cleanups to the group repository and remove any work that is no longer needed for project development.
 10. Any concerns not addressed by team policies should be discussed with the rest of the team.
+11. Commit and push every time you make changes to our project(s), don’t keep local copies of work.
